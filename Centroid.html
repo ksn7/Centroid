@@ -35,17 +35,21 @@ def centroid( f = input_box( default = -1*(x-2)^2 + 4, label = "function", width
         x_max = input_box( default = 5, label = "x max", width = 5), 
         y_min = input_box( default = -1, label = "y min", width = 5), 
         y_max = input_box( default = 5, label = "y max", width = 5) ):
-            
+    
+    # Plot the original function and a shaded portion        
     graph_f = plot( f, x_min, x_max, ymin = y_min, ymax = y_max)
     graph_shaded = plot( f, lower, upper, fill = True, fillcolor = '#ff9999', ymin = y_min, ymax = y_max )
 
+    # Calculate A and use the formula to find c_x and c_y
     (A, precision) = numerical_integral( f, lower, upper )
     c_x = 1 / A * numerical_integral( x*f, lower, upper)[0]
     c_y = 1 / A * numerical_integral( 1/2 * f^2, lower, upper)[0]
 
+    # Set c_x and c_y as a point and set up the label
     cent = point( (c_x, c_y), size = 25)
     label = text( "(" + str(c_x) + ", " + str(c_y) + ")" , (c_x, c_y + (y_max - y_min)/20) )
 
+    # Compile the things to be graphed and show it
     graph = graph_f + graph_shaded + cent + label
     graph.show()
 
@@ -53,6 +57,6 @@ def centroid( f = input_box( default = -1*(x-2)^2 + 4, label = "function", width
 </div>
 
 <hr>
-Last modified on June 13th, 2017.
+Last modified on June 15th, 2017.
 </body>
 </html>
