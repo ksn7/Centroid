@@ -46,38 +46,38 @@ $(function () {
 <div class="compute">
 <script type="text/x-sage">
 
-@interact( layout = [ ['func'], ['lower', 'upper'], ['x_min', 'x_max'], ['y_min', 'y_max'] ])
-def centroid( func = input_box( default = -1*(x-2)^2 + 4, label = "f(x) = ", width = 20), 
-        lower = input_box( default = 1, label = "a", width = 5), 
-        upper = input_box( default = 4, label = "b", width = 5), 
-        x_min = input_box( default = -1, label = "x min", width = 5), 
-        x_max = input_box( default = 5, label = "x max", width = 5), 
-        y_min = input_box( default = -1, label = "y min", width = 5), 
-        y_max = input_box( default = 5, label = "y max", width = 5) ):
+@interact( layout = [ ['f', 'g'], ['lower', 'upper'], ['x_min', 'x_max'], ['y_min', 'y_max'] ])
+def centroid( f = input_box( default = x, label = "f(x) = ", width = 20), 
+        g = input_box( default = x^2, label = "g(x) = ", width = 20),
+        lower = input_box( default = 0, label = "lower bound", width = 5), 
+        upper = input_box( default = 1, label = "upper bound", width = 5), 
+        x_min = input_box( default = -.5, label = "x min", width = 5), 
+        x_max = input_box( default = 1.5, label = "x max", width = 5), 
+        y_min = input_box( default = -0.5, label = "y min", width = 5), 
+        y_max = input_box( default = 1.5, label = "y max", width = 5) ):
     
-    f = func.function(x)
-
-    # Plot the original function and a shaded portion        
-    graph_f = plot( f, x_min, x_max, ymin = y_min, ymax = y_max)
-    graph_shaded = plot( f, lower, upper, fill = True, fillcolor = '#ff9999', ymin = y_min, ymax = y_max )
+    # Plot the original function and a shaded portion  
+    graph_f = plot( f, x_min, x_max, ymin = y_min, ymax = y_max )      
+    graph_shaded = plot( f, lower, upper, ymin = y_min, ymax = y_max, fill = g, fillcolor = '#ff9999')
+    graph_g = plot( g, x_min, x_max, ymin = y_min, ymax = y_max )
 
     # Calculate A and use the formula to find c_x and c_y
-    (A, precision) = numerical_integral( f, lower, upper )
-    c_x = 1 / A * numerical_integral( x*f, lower, upper)[0]
-    c_y = 1 / A * numerical_integral( 1/2 * f^2, lower, upper)[0]
+    (A, precision) = numerical_integral( f-g, lower, upper )
+    c_x = (1 / A) * numerical_integral( x*(f-g), lower, upper)[0]
+    c_y = (1 / A) * numerical_integral( 1/2 *(f^2 - g^2), lower, upper)[0]
 
     # Set c_x and c_y as a point and set up the label
     cent = point( (c_x, c_y), size = 25)
     label = text( "(" + str(c_x) + ", " + str(c_y) + ")" , (c_x, c_y + (y_max - y_min)/20) )
 
     # Compile the things to be graphed and show it
-    graph = graph_f + graph_shaded + cent + label
+    graph = graph_f + graph_shaded + graph_g + cent + label
     graph.show()
 
 </script>
 </div>
 
 <hr>
-Last modified on June 21st, 2017.
+Last modified on June 23rd, 2017.
 </body>
 </html>
