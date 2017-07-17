@@ -36,9 +36,9 @@ $(function () {
 <div class="latex">
     \textrm{Given two functions of x and end points a and b, this demo computes and displays the centroid, whose coordinates are given by }
     \\
-    c_x = \frac{1}{A} \int_a^bx(f(x)-g(x)) \, dx, c_y = \frac{1}{A} \int_a^b(\frac{1}{2}*[ f(x) ]^2 - [g(x)]^2) \, dx
+    c_x = \frac{1}{A} \int_a^bx(f(x)-g(x)) \, dx, \, c_y = \frac{1}{A} \int_a^b(\frac{1}{2}*[ f(x) ]^2 - [g(x)]^2) \, dx
     \\
-    \textrm{ where } A = \int_a^b(f(x)-g(x)) \, dx
+    \textrm{ where } A = \int_a^b(f(x)-g(x)) \, dx.
 </div>
 
 <hr>
@@ -47,18 +47,18 @@ $(function () {
 <script type="text/x-sage">
 
 @interact( layout = [ ['f', 'g'], ['lower', 'upper'], ['x_min', 'x_max'], ['y_min', 'y_max'] ])
-def centroid( f = input_box( default = x, label = "f(x) = ", width = 20), 
-        g = input_box( default = x^2, label = "g(x) = ", width = 20),
+def centroid( f = input_box( default = cos(x), label = "f(x) = ", width = 20), 
+        g = input_box( default = 0, label = "g(x) = ", width = 20),
         lower = input_box( default = 0, label = "a", width = 5), 
-        upper = input_box( default = 1, label = "b", width = 5), 
+        upper = input_box( default = pi/2, label = "b", width = 5), 
         x_min = input_box( default = -.5, label = "x min", width = 5), 
-        x_max = input_box( default = 1.5, label = "x max", width = 5), 
+        x_max = input_box( default = 2, label = "x max", width = 5), 
         y_min = input_box( default = -0.5, label = "y min", width = 5), 
         y_max = input_box( default = 1.5, label = "y max", width = 5) ):
     
     # Plot the original function and a shaded portion  
     graph_f = plot( f, x_min, x_max, ymin = y_min, ymax = y_max )      
-    graph_shaded = plot( f, lower, upper, ymin = y_min, ymax = y_max, fill = g, fillcolor = '#ff9999')
+    graph_shaded = plot( f, lower, upper, ymin = y_min, ymax = y_max, fill = g, fillcolor = '#ebccff')
     graph_g = plot( g, x_min, x_max, ymin = y_min, ymax = y_max )
 
     # Calculate A and use the formula to find c_x and c_y
@@ -78,6 +78,6 @@ def centroid( f = input_box( default = x, label = "f(x) = ", width = 20),
 </div>
 
 <hr>
-Last modified on June 28th, 2017.
+Last modified on July 17th, 2017.
 </body>
 </html>
