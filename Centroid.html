@@ -36,7 +36,7 @@ $(function () {
 <div class="latex">
     \textrm{Given two functions of x and end points a and b, this demo computes and displays the centroid, whose coordinates are given by }
     \\
-    c_x = \frac{1}{A} \int_a^bx(f(x)-g(x)) \, dx, \, c_y = \frac{1}{A} \int_a^b(\frac{1}{2}*[ f(x) ]^2 - [g(x)]^2) \, dx
+    c_x = \frac{1}{A} \int_a^bx(f(x)-g(x)) \, dx, \, c_y = \frac{1}{A} \int_a^b \frac{1}{2}*([ f(x) ]^2 - [g(x)]^2) \, dx
     \\
     \textrm{ where } A = \int_a^b(f(x)-g(x)) \, dx.
 </div>
@@ -78,6 +78,6 @@ def centroid( f = input_box( default = cos(x), label = "f(x) = ", width = 20),
 </div>
 
 <hr>
-Last modified on July 17th, 2017.
+Last modified on July 27th, 2017.
 </body>
 </html>
