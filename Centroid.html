@@ -47,15 +47,18 @@ $(function () {
 <script type="text/x-sage">
 
 @interact( layout = [ ['f', 'g'], ['lower', 'upper'], ['x_min', 'x_max'], ['y_min', 'y_max'] ])
-def centroid( f = input_box( default = cos(x), label = "f(x) = ", width = 20), 
-        g = input_box( default = 0, label = "g(x) = ", width = 20),
-        lower = input_box( default = 0, label = "a", width = 5), 
-        upper = input_box( default = pi/2, label = "b", width = 5), 
-        x_min = input_box( default = -.5, label = "x min", width = 5), 
-        x_max = input_box( default = 2, label = "x max", width = 5), 
-        y_min = input_box( default = -0.5, label = "y min", width = 5), 
-        y_max = input_box( default = 1.5, label = "y max", width = 5) ):
+def centroid( f = input_box( default = cos(x), label = "$f(x) = $", width = 20), 
+        g = input_box( default = 0, label = "$g(x) = $", width = 20),
+        lower = input_box( default = 0, label = "$a$", width = 5), 
+        upper = input_box( default = pi/2, label = "$b$", width = 5), 
+        x_min = input_box( default = "-.5", label = "$x_{min}$", width = 5), 
+        x_max = input_box( default = 2, label = "$x_{max}$", width = 5), 
+        y_min = input_box( default = "-0.5", label = "$y_{min}$", width = 5), 
+        y_max = input_box( default = "1.5", label = "$y_{max}$", width = 5) ):
     
+    # Set number of digits to print
+    num_digits = 7
+
     # Plot the original function and a shaded portion  
     graph_f = plot( f, x_min, x_max, ymin = y_min, ymax = y_max )      
     graph_shaded = plot( f, lower, upper, ymin = y_min, ymax = y_max, fill = g, fillcolor = '#ebccff')
@@ -68,7 +71,7 @@ def centroid( f = input_box( default = cos(x), label = "f(x) = ", width = 20),
 
     # Set c_x and c_y as a point and set up the label
     cent = point( (c_x, c_y), size = 25)
-    label = text( "(" + str(c_x) + ", " + str(c_y) + ")" , (c_x, c_y + (y_max - y_min)/20) )
+    label = text( "(" + str(n(c_x, digits = num_digits)) + ", " + str(n(c_y, digits = num_digits)) + ")" , (c_x, c_y + (y_max - y_min)/20) )
 
     # Compile the things to be graphed and show it
     graph = graph_f + graph_shaded + graph_g + cent + label
@@ -78,6 +81,6 @@ def centroid( f = input_box( default = cos(x), label = "f(x) = ", width = 20),
 </div>
 
 <hr>
-Last modified on July 27th, 2017.
+Last modified on August 15th, 2017.
 </body>
 </html>
