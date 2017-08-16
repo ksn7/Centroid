@@ -55,9 +55,6 @@ def centroid( f = input_box( default = cos(x), label = "$f(x) = $", width = 20),
         x_max = input_box( default = 2, label = "$x_{max}$", width = 5), 
         y_min = input_box( default = "-0.5", label = "$y_{min}$", width = 5), 
         y_max = input_box( default = "1.5", label = "$y_{max}$", width = 5) ):
-    
-    # Set number of digits to print
-    num_digits = 7
 
     # Plot the original function and a shaded portion  
     graph_f = plot( f, x_min, x_max, ymin = y_min, ymax = y_max )      
@@ -71,7 +68,7 @@ def centroid( f = input_box( default = cos(x), label = "$f(x) = $", width = 20),
 
     # Set c_x and c_y as a point and set up the label
     cent = point( (c_x, c_y), size = 25)
-    label = text( "(" + str(n(c_x, digits = num_digits)) + ", " + str(n(c_y, digits = num_digits)) + ")" , (c_x, c_y + (y_max - y_min)/20) )
+    label = text( "(%6.7f, " %c_x + "%6.7f)" %c_y , (c_x, c_y + (y_max - y_min)/20) )
 
     # Compile the things to be graphed and show it
     graph = graph_f + graph_shaded + graph_g + cent + label
@@ -81,6 +78,6 @@ def centroid( f = input_box( default = cos(x), label = "$f(x) = $", width = 20),
 </div>
 
 <hr>
-Last modified on August 15th, 2017.
+Last modified on August 16th, 2017.
 </body>
 </html>
